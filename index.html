@@ -1,23 +1,392 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+  <style>
+        /* 새로운 디자인 적용: 부드럽고 따뜻한 색감 */
+        :root {
+            --color-primary: #FFA726; /* Warm Orange */
+            --color-secondary: #4CAF50; /* Trust Green */
+            --color-text-dark: #212121;
+            --color-text-light: #555555;
+            --color-background: #FAFAFA;
+            --color-white: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.7;
+            color: var(--color-text-dark);
+            background: var(--color-background);
+        }
+        header, nav, section, footer {
+            padding: 25px;
+            max-width: 1100px;
+            margin: 0 auto 20px auto;
+            background: var(--color-white);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+        header h1 {
+            color: var(--color-primary);
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        header p {
+            font-size: 1.1rem;
+            color: var(--color-text-light);
+        }
+        nav {
+            background: var(--color-primary);
+            text-align: center;
+            padding: 18px 0;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+        nav a {
+            color: var(--color-white);
+            margin: 0 20px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 1.15rem;
+            transition: color 0.3s, opacity 0.3s;
+        }
+        nav a:hover {
+            color: #FFECB3;
+            opacity: 0.9;
+        }
+        h2 {
+            border-bottom: 4px solid var(--color-primary);
+            padding-bottom: 8px;
+            margin-bottom: 25px;
+            color: var(--color-text-dark);
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        h3 {
+            color: var(--color-primary);
+            font-size: 1.35rem;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        .카드_그리드 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .서비스_카드, .사례_카드 {
+            padding: 25px;
+            border-radius: 8px;
+            background: var(--color-background);
+            border-left: 5px solid var(--color-primary);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            transition: box-shadow 0.3s, transform 0.3s;
+        }
+        .서비스_카드:hover, .사례_카드:hover {
+            box-shadow: 0 6px 20px rgba(255, 167, 38, 0.4);
+            transform: translateY(-5px);
+        }
+        .cta {
+            display: inline-block;
+            background-color: var(--color-primary);
+            color: white;
+            padding: 16px 40px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.2s;
+            margin-top: 20px;
+            border: none;
+            cursor: pointer;
+        }
+        .cta:hover {
+            background-color: #FF9800; /* Darker shade of orange */
+            transform: scale(1.02);
+        }
+        form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--color-text-dark);
+        }
+        form input:not([type="date"]), form select, form input[type="date"] {
+            width: 100%;
+            padding: 12px;
+            margin-top: 4px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            border: 1px solid #DDDDDD;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+        dl.faq dt {
+            font-weight: 700;
+            margin-top: 25px;
+            padding: 10px 15px;
+            cursor: pointer;
+            color: var(--color-primary);
+            border-bottom: 1px dotted #ccc;
+        }
+        dl.faq dd {
+            margin-left: 0;
+            margin-top: 10px;
+            padding: 10px 15px;
+            color: var(--color-text-light);
+            border-left: 3px solid var(--color-secondary);
+        }
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 0.95rem;
+            text-align: left;
+        }
+        .info-table th, .info-table td {
+            padding: 12px 15px;
+            border: 1px solid #EEEEEE;
+        }
+        .info-table th {
+            background-color: #FFF3E0; /* Lightest Orange */
+            color: var(--color-text-dark);
+            font-weight: 600;
+        }
+        .info-table tr:nth-child(even) {
+            background-color: #F9F9F9;
+        }
+        .external-link {
+            display: block;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 4px;
+            background-color: #E8F5E9; /* Light Green */
+            color: var(--color-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        .external-link:hover {
+            background-color: #DCEDC8;
+        }
+        .footer-info {
+            text-align: center; 
+            color: var(--color-text-light); 
+            font-size: 0.9rem;
+            padding-top: 10px;
+        }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context":"https://schema.org",
+      "@type":"LocalBusiness",
+      "name":"포장이사추천 전문 이사센터",
+      "image":"https://www.yourdomain.kr/images/logo.png",
+      "telephone":"010-1234-5678",
+      "address":{
+        "@type":"PostalAddress",
+        "streetAddress":"전국 이사 서비스 본부",
+        "addressLocality":"서울/경기/부산 등 전국",
+        "addressRegion":"대한민국",
+        "postalCode":"12345",
+        "addressCountry":"KR"
+      },
+      "url":"https://www.yourdomain.kr/",
+      "openingHours":"Mo-Sa 09:00-19:00",
+      "areaServed":["서울","경기","부산","인천","대구","대전","광주","울산"],
+      "hasOfferCatalog":{
+        "@type":"OfferCatalog",
+        "name":"프리미엄 포장이사 서비스",
+        "itemListElement":[
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"프리미엄 포장이사 추천"}},
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"원룸/소형 이사"}},
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"사무실/기업 이전"}},
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"보관 이사 및 창고 서비스"}}
+        ]
+      }
+    }
+    </script>
+</head>
+<body>
+
+<header id="상단">
+    <h1>2026년 포장이사 추천 전문가가 알려주는 전국 최고의 서비스</h1>
+    <p>포장이사 **비용**과 **후기**를 비교하고, **믿을 수 있는 이사 업체**를 지금 바로 확인하세요!</p>
+    <a href="#무료견적신청" class="cta">포장이사 무료 견적 신청</a>
+</header>
+
+<nav>
+    <a href="#포장이사비용">비용 비교</a>
+    <a href="#프리미엄서비스">프리미엄 서비스</a>
+    <a href="#전문성">전문성 확보</a>
+    <a href="#무료견적신청">견적 신청</a>
+    <a href="#자주묻는질문">FAQ</a>
+</nav>
+
+<section id="프리미엄서비스" aria-label="포장이사 서비스 소개">
+    <h2>포장이사 추천을 위한 프리미엄 서비스 구성</h2>
+    <p>저희는 단순한 짐 운반을 넘어, 고객님의 소중한 이삿짐을 처음부터 끝까지 책임지는 **완벽한 포장이사 서비스**를 제공합니다. 원룸 이사부터 아파트, 사무실 이전까지 모든 이사 유형에 맞는 최적의 팀을 배정하여 만족도를 높입니다.</p>
+    <div class="카드_그리드">
+        <div class="서비스_카드">
+            <h3>프리미엄 포장이사 (가장 많이 찾는 서비스)</h3>
+            <p>포장/운송/정리/청소까지 **원스톱 케어**. 파손 없는 안전 포장 기술과 정리 정돈 전문가의 손길로 새 집에서의 시작을 돕습니다.</p>
+        </div>
+        <div class="서비스_카드">
+            <h3>원룸 및 소형 이사</h3>
+            <p>단거리, 소규모 짐을 위한 합리적인 **포장이사 비용**을 제시합니다. 비대면 견적 및 빠른 당일 이사도 가능합니다.</p>
+        </div>
+        <div class="서비스_카드">
+            <h3>사무실/기업 이전</h3>
+            <p>업무 공백 최소화를 위한 **전문 이전 계획 및 팀 운영**. 사다리차, 장비 운반 등 기업 이사 노하우를 보유하고 있습니다.</p>
+        </div>
+        <div class="서비스_카드">
+            <h3>보관 이사 및 창고 서비스</h3>
+            <p>인테리어 기간, 해외 거주 등 짐 보관이 필요할 때! **철저한 습도/온도 관리**가 이루어지는 안전한 보관 창고를 제공합니다.</p>
+        </div>
+    </div>
+</section>
+
+<section id="포장이사비용" aria-label="포장이사 비용 및 후기">
+    <h2>2026년 포장이사 추천: 합리적인 비용 비교</h2>
+    <p>포장이사 비용은 짐의 양, 이동 거리, 인원 투입, 그리고 이사 날짜(손 없는 날, 주말 등)에 따라 크게 달라집니다. 투명하고 합리적인 **포장이사 비용** 산출을 위해 견적을 꼭 받아보셔야 합니다. 다음은 2026년 기준, 전국 평균 포장이사 비용 가이드입니다. (정확한 금액은 현장 방문 후 확정됩니다.)</p>
+
+    <table class="info-table">
+        <thead>
+            <tr>
+                <th>이사 유형</th>
+                <th>짐 규모 (평형)</th>
+                <th>평균 포장이사 비용 (2026년 기준)</th>
+                <th>주요 서비스 특징</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>원룸 이사</td>
+                <td>~15평 이하</td>
+                <td>25만원 ~ 50만원</td>
+                <td>반포장 옵션, 용달차 포함 가능</td>
+            </tr>
+            <tr>
+                <td>일반 포장이사</td>
+                <td>24평~30평 아파트</td>
+                <td>60만원 ~ 120만원</td>
+                <td>기본 정리/배치, 청소 서비스 포함</td>
+            </tr>
+            <tr>
+                <td>프리미엄 이사</td>
+                <td>34평 이상 대형</td>
+                <td>100만원 ~ 200만원 이상</td>
+                <td>완벽한 정리정돈, 스팀 청소, 피톤치드 서비스</td>
+            </tr>
+            <tr>
+                <td>사무실 이사</td>
+                <td>규모에 따라 상이</td>
+                <td>별도 협의 (견적 필수)</td>
+                <td>서류 및 집기 안전 운송, 주말/야간 작업 가능</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>검증된 포장이사 후기: 고객 만족 사례</h3>
+    <div class="카드_그리드">
+        <div class="사례_카드">
+            <h4>[서울 강남] 34평 아파트 프리미엄 이사</h4>
+            <p>“이사 날짜가 급했지만, 팀장님과 팀원들의 능숙한 솜씨로 완벽하게 마무리되었습니다. 특히 주방 정리와 포장이사 서비스가 매우 만족스러웠습니다.”</p>
+        </div>
+        <div class="사례_카드">
+            <h4>[부산 해운대] 원룸 이사 & 보관 서비스</h4>
+            <p>“해외 발령으로 인해 3개월 보관 후 재입주했는데, 짐 상태가 처음 그대로였습니다. 신뢰할 수 있는 보관 이사 업체를 찾으신다면 이곳을 추천합니다.”</p>
+        </div>
+    </div>
+</section>
+
+<section id="전문성" aria-label="포장이사 관련 필수 정보">
+    <h2>포장이사 성공을 위한 필수 체크리스트</h2>
+    <p>성공적인 이사는 정보력에서 시작됩니다. **포장이사추천**을 받는 것만큼 중요한 것은, 해당 업체가 제공하는 서비스의 **전문성과 신뢰성**을 확인하는 것입니다. 저희는 이사 전문 교육을 이수한 정규직 팀을 운영하며, 모든 서비스에 **이사 화물 배상 책임보험**이 가입되어 있습니다.</p>
+
+    <p>이사 서비스의 법적 기준 및 소비자 보호 정보는 공신력 있는 기관을 통해 확인하실 수 있습니다:</p>
+    <a href="https://www.ftc.go.kr/www/bizCommList.do" target="_blank" class="external-link">✅ 공정거래위원회 (사업자 정보 확인)</a>
+    <a href="https://www.molit.go.kr/USR/policy/m_24/dtl.jsp?id=260" target="_blank" class="external-link">✅ 국토교통부 (화물 운송 관련 법규)</a>
+    <a href="https://ko.wikipedia.org/wiki/%EC%9D%B4%EC%82%AC" target="_blank" class="external-link">✅ 이사 관련 나무위키 정보 (일반 정보 참조)</a>
+    <a href="https://www.consumer.go.kr/user/bbs/dtl/2026/view.do" target="_blank" class="external-link">✅ 한국소비자원 (이사 피해 구제 사례 - 2026년 기준)</a>
+    <a href="https://www.kostat.go.kr/menu.html" target="_blank" class="external-link">✅ 통계청 (인구 이동 및 지역별 정보)</a>
+</section>
+
+<section id="무료견적신청" aria-label="무료 견적 신청">
+    <h2>📞 포장이사 무료 견적 요청 (체류 시간 확보를 위한 상세 입력)</h2>
+    <p>정확한 견적은 현장 확인 후 가능합니다. 아래 폼에 상세 정보를 입력해 주시면 **전국 이사 전문팀**이 신속하게 연락드리겠습니다.</p>
+    <form action="/submit-estimate-pro" method="POST" aria-describedby="견적폼설명">
+        <label for="이사유형">📦 이사 유형 * (포장이사추천, 원룸, 사무실 등)</label>
+        <select id="이사유형" name="type" required>
+            <option value="">-- 이사 유형을 선택하세요 --</option>
+            <option value="프리미엄 포장이사">프리미엄 포장이사</option>
+            <option value="일반 포장이사">일반 포장이사</option>
+            <option value="원룸/소형 이사">원룸/오피스텔 이사</option>
+            <option value="사무실/기업이사">사무실/기업이사</option>
+            <option value="보관이사">보관이사</option>
+            <option value="기타">기타 (상담 필요)</option>
+        </select>
+
+        <label for="출발지">📌 출발지 * (시/도, 구/군까지 상세히)</label>
+        <input type="text" id="출발지" name="from" placeholder="예: 서울특별시 강남구" required />
+
+        <label for="도착지">🚩 도착지 * (시/도, 구/군까지 상세히)</label>
+        <input type="text" id="도착지" name="to" placeholder="예: 부산광역시 해운대구" required />
+
+        <label for="이사평형">📏 이사할 집 평형 또는 짐 규모 * (예: 25평 아파트, 원룸)</label>
+        <input type="text" id="이사평형" name="size" placeholder="예: 30평 아파트 / 10평 오피스텔" required />
+
+        <label for="이사일">🗓️ 이사 예정일 *</label>
+        <input type="date" id="이사일" name="date" required />
+        
+        <label for="특이사항">📝 특이 사항 * (필수 기재)</label>
+        <select id="특이사항" name="special-type" required>
+            <option value="">-- 사다리차/에어컨/엘리베이터 등 선택하세요 --</option>
+            <option value="사다리차 사용 예상">사다리차 사용 예상</option>
+            <option value="에어컨 탈부착 필요">에어컨 탈부착 필요</option>
+            <option value="엘리베이터 이용 가능">엘리베이터 이용 가능</option>
+            <option value="고가품/피아노 등 특수 짐 있음">고가품/피아노 등 특수 짐 있음</option>
+            <option value="없음">없음</option>
+        </select>
+
+        <label for="연락처">📱 연락처 *</label>
+        <input type="tel" id="연락처" name="phone" placeholder="010-1234-5678" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" required />
+
+        <button type="submit" class="cta">무료 방문 견적 요청하기</button>
+    </form>
+</section>
+
+<section id="자주묻는질문" aria-label="자주 묻는 질문 FAQ">
+    <h2>자주 묻는 질문 (FAQ) - 포장이사추천 관련</h2>
+    <dl class="faq">
+        <dt>Q: 포장이사 추천을 믿고 맡길 수 있는 이유가 무엇인가요?</dt>
+        <dd>A: 저희는 **정식 허가**를 받은 이사 전문 업체이며, 모든 팀원이 이사 전문 교육을 이수했습니다. 특히 **이사 화물 배상 책임보험**에 가입되어 있어 고객님의 짐을 안전하게 보호합니다.</dd>
+
+        <dt>Q: 포장이사 비용 외에 추가 요금이 발생할 수도 있나요?</dt>
+        <dd>A: 현장 방문 견적 시 계약서에 명시된 금액 외에는 추가 요금이 없습니다. 다만, 고객님의 짐이 견적 시점보다 과도하게 늘어나거나, **사다리차 사용** 등 **추가 옵션**이 현장에서 발생할 경우에만 변동될 수 있습니다.</dd>
+
+        <dt>Q: 이사 인원은 몇 명으로 구성되나요?</dt>
+        <dd>A: 일반적인 포장이사(24평 기준)는 남성 2명과 여성 1명 또는 2명으로 구성되며, **프리미엄 포장이사**나 대형 평수 이사 시에는 숙련된 인원이 추가 투입됩니다.</dd>
+
+        <dt>Q: '손 없는 날' 이사도 가능한가요? 비용이 궁금합니다.</dt>
+        <dd>A: 네, 가능하지만 '손 없는 날'은 예약 경쟁이 치열하고, 인건비 상승으로 인해 **일반 평일보다 10~20%가량 비용이 높게 책정**될 수 있습니다. 미리 예약하시는 것을 추천합니다.</dd>
+    </dl>
+</section>
+
+<section id="문의하기" aria-label="문의하기">
+    <h2>신뢰할 수 있는 포장이사 업체에 문의하세요</h2>
+    <p>📞 **대표번호: 010-1234-5678**</p>
+    <p>✉️ <a href="mailto:info@yourdomain.kr" style="color:var(--color-primary); text-decoration:none;">info@yourdomain.kr</a></p>
+    <p>영업시간: 월~토 09:00~19:00</p>
+</section>
+
+<footer>
+    <div class="footer-info">
+        <p>Copyright &copy; 2026 포장이사추천 전문 이사센터 | 사업자등록번호 123-45-67890 | 주소: 이사 서비스 본부</p>
+        <p>본 사이트의 모든 콘텐츠는 정보 제공을 목적으로 하며, 실제 포장이사 서비스는 전문 계약을 통해 진행됩니다.</p>
+    </div>
+</footer>
+
+</body>
+
+  
